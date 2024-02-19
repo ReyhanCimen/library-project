@@ -25,7 +25,7 @@ class library:
         kitap_bilgisi = f"{ad},{yazar},{yayin_yili},{sayfa_sayisi}\n"
         self.lib.write(kitap_bilgisi)
 
-    def kitap_sil(self, ad, yazar):
+    def kitap_sil(self, ad):
         self.lib.seek(0)
         kitaplar = self.lib.readlines()
         güncellenmis_kitaplar = []
@@ -33,7 +33,7 @@ class library:
 
         for kitap in kitaplar:
             kitap_bilgisi = kitap.strip().split(',')
-            if ad == kitap_bilgisi[0] and yazar == kitap_bilgisi[1]:
+            if ad == kitap_bilgisi[0] :
                 silindi = True
             else:
                 güncellenmis_kitaplar.append(kitap)
@@ -108,9 +108,8 @@ class Kütüp_uyg:
 
     def kitap_sil(self):
         ad = self.ad_entry.get()
-        yazar = self.yazar_entry.get()
-        if ad and yazar:
-            success = self.kütüphanem.kitap_sil(ad, yazar)
+        if ad:
+            success = self.kütüphanem.kitap_sil(ad)
             if success:
                 messagebox.showinfo("Başarılı", f"'{ad}' kitabı başarıyla silindi.")
             else:
